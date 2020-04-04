@@ -1,0 +1,117 @@
+ if((fp=fopen("hesaplar.txt","r"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            if((fp2=fopen("yenihesaplar.txt","w+"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            if((fp3=fopen("bireyselmusteriler.txt","r"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            if((fp4=fopen("ticarimusteriler.txt","r"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            printf("Bireysel musteriyseniz ->1 || Ticari musteriyseniz-> 2 :");
+            scanf("%d",&secenek2);
+            fflush(stdin);
+            printf("Musteri numaranizi giriniz:");
+            scanf("%d",&gecicimusterino);
+            fflush(stdin);
+            printf("Hesap numaranizi giriniz:");
+            scanf("%d",&gecicihno);
+            fflush(stdin);
+            if(secenek2==1)
+            {
+                while(!feof(fp))
+                {
+                  if(fscanf(fp,"%d %d %f",&bmgn,&bmghn,&gecicibakiye)!=EOF)
+                    {
+                    if((bmgn==gecicimusterino)&&(bmghn==gecicihno))
+                    {
+                        printf("Bu hesaptan en fazla 750TL cekebilirsiniz.\n");
+                        printf("Cekmek istediginiz bakiyeyi giriniz:");
+                        scanf("%f",&cekilecektutar);
+                        fflush(stdin);
+                        if((cekilecektutar<=750)&&cekilecektutar<=gecicibakiye)
+                        {
+                            gecicibakiye=gecicibakiye-cekilecektutar;
+                            fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                            printf("Yeni bakiyeniz:%d\n",gecicibakiye);
+                        }
+                        else
+                        {
+                            fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                            printf("Para cekme isleminde hataniz olustu.");
+                        }
+
+
+                    }
+                    else
+                    {
+                        fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                    }
+                    }
+                }
+
+            }
+            if(secenek2==2)
+            {
+               while(!feof(fp))
+                {
+                  if(fscanf(fp,"%d %d %f",&bmgn,&bmghn,&gecicibakiye)!=EOF)
+                    {
+                    if((bmgn==gecicimusterino)&&(bmghn==gecicihno))
+                    {
+                        printf("Bu hesaptan en fazla 1500TL cekebilirsiniz.\n");
+                        printf("Cekmek istediginiz bakiyeyi giriniz:");
+                        scanf("%f",&cekilecektutar);
+                        fflush(stdin);
+                        if((cekilecektutar<=1500)&&cekilecektutar<=gecicibakiye)
+                        {
+                            gecicibakiye=gecicibakiye-cekilecektutar;
+                            fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                            printf("Yeni bakiyeniz:%f\n",gecicibakiye);
+                        }
+                        else
+                        {
+                            fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                            printf("Para cekme isleminde hataniz olustu.");
+                        }
+
+
+                    }
+                    else
+                    {
+                        fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                    }
+                    }
+                }
+            }
+            fclose(fp);
+            fclose(fp2);
+            fclose(fp3);
+            fclose(fp4);
+            remove("hesaplar.txt");
+            value = rename(old_name, new_name);
+            if(!value)
+            {
+                printf("\n");
+            }
+            else
+            {
+                perror("\n");
+            }
+            printf("Baska islem yapmak ister misiniz(Evet->E/e | Hayir->H/h):");
+            scanf("%c",&y);
+            fflush(stdin);
+            if(y=='e'||y=='E')
+                goto devamet;
+            else
+                break;

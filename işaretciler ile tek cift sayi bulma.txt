@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int dizi[10],diziCift[10],diziTek[10];
+    int *pdizi=dizi;
+    int *pdiziCift=diziCift;
+    int *pdiziTek=diziTek;
+    int i,ciftsayac=0,teksayac=0;
+    for(i=0;i<10;i++)
+    {
+        dizi[i]=rand();
+    }
+    for(i=0;i<10;i++)
+    {
+        printf("%d.sayi: %d\n",i+1,*(pdizi+i));
+    }
+    for(i=0;i<10;i++)
+    {
+        if((*(pdizi+i))%2==0)
+        {
+            diziCift[ciftsayac]=*(pdizi+i);
+            ciftsayac++;
+        }
+        else
+        {
+            diziTek[teksayac]=*(pdizi+i);
+            teksayac++;
+        }
+    }
+    printf("\nCift sayilar:\n");
+    for(i=0;i<ciftsayac;i++)
+    {
+        printf("%d.cift sayi:%d\n",i+1,*(pdiziCift+i));
+    }
+    printf("\nTek sayilar:\n");
+    for(i=0;i<teksayac;i++)
+    {
+        printf("%d.cift sayi:%d\n",i+1,*(pdiziTek+i));
+    }
+}

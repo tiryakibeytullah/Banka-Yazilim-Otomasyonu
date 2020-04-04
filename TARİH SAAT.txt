@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main()
+{
+    FILE *fp;
+    if((fp=fopen("deneme.txt","a+"))==NULL)
+    {
+        printf("Hata.");
+        exit(1);
+    }
+    time_t simdiki_zaman ;
+    time(&simdiki_zaman);
+    char tc[11];
+    float para;
+    int gun,ay,yil,saat,dakika,saniye;
+    int fgun,fay,fyil,fsaat,fdakika,fsaniye;
+    struct tm *zaman=localtime(&simdiki_zaman);
+    //fprintf(fp,"%d %d %d %d %d %d\n",zaman->tm_mday,zaman->tm_mon+1,zaman->tm_year+1900,zaman->tm_hour,zaman->tm_min,zaman->tm_sec);
+    while(!feof(fp))
+    {
+        fscanf(fp,"%s %f %d %d %d %d %d %d",tc,&para,&gun,&ay,&yil,&saat,&dakika,&saniye);
+    }
+    printf("%s %f %d %d %d %d %d %d\n",tc,para,gun,ay,yil,saat,dakika,saniye);
+    printf("gun farki :%d\nay farki :%d\nyil farki :%d\nsaat farki :%d\ndakika farki :%d\nsaniye farki :%d\n",zaman->tm_mday-gun,(zaman->tm_mon+1)-ay,(zaman->tm_year+1900)-yil,zaman->tm_hour-saat,zaman->tm_min-dakika,zaman->tm_sec-saniye);
+    printf("Basarili.");
+    fclose(fp);
+    return 0;
+
+}
+

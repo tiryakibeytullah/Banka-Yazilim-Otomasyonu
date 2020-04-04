@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    FILE *fp,*fp2;
+    int hesapno;
+
+    int no;
+    char ad[20];
+    int numara;
+    int yeni;
+
+    printf("Hesap numaranizi giriniz:");
+    scanf("%d",&hesapno);
+    if((fp=fopen("orjinal.txt","r"))==NULL)
+    {
+        printf("Dosya acarken hata.");
+        exit(1);
+    }
+    if((fp2=fopen("yenidosya.txt","a+"))==NULL)
+    {
+        printf("Dosya acarken hata.");
+        exit(1);
+    }
+    while(!feof(fp))
+    {
+        fscanf(fp,"%d %s %d",&no,ad,&numara);
+        if(hesapno==no)
+        {
+            yeni=numara-10;
+            fprintf(fp2,"%d %s %d\n",no,ad,yeni);
+        }
+        else
+        {
+             fprintf(fp2,"%d %s %d\n",no,ad,numara);
+        }
+    }
+    fclose(fp);
+    fclose(fp2);
+    return 0;
+
+
+}
+

@@ -1,0 +1,48 @@
+if((fp=fopen("hesaplar.txt","r"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            if((fp2=fopen("yenihesaplar.txt","w+"))==NULL)
+            {
+                printf("Dosya acarken hata.");
+                exit(1);
+            }
+            printf("Musteri numaranizi giriniz :");
+            scanf("%d",&gecicimusterino);
+            printf("Silmek istediginiz hesap numaranizi giriniz :");
+            scanf("%d",&gecicihesapno);
+            while(!feof(fp))
+            {
+                if(fscanf(fp,"%d %d %f",&bmgn,&bmghn,&gecicibakiye)!=EOF)
+                {
+                    if((gecicimusterino==bmgn)&&(gecicihesapno==bmghn))
+                    {
+                        printf("Hesabiniz silinmistir.");
+                    }
+                    if(((gecicimusterino!=bmgn)&&(gecicihesapno!=bmghn)))
+                    {
+                        fprintf(fp2,"%d %d %f\n",bmgn,bmghn,gecicibakiye);
+                    }
+                }
+            }
+        }
+            fclose(fp);
+            fclose(fp2);
+            remove("hesaplar.txt");
+            value = rename(old_name, new_name);
+            if(!value)
+            {
+                printf("\n");
+            }
+            else
+            {
+                perror("\n");
+            }
+            printf("Baska islem yapmak ister misiniz(Evet->E/e | Hayir->H/h):");
+            scanf("%s",&y);
+            fflush(stdin);
+            if(y=='e'||y=='E')
+                goto devamet;
+            else
+                break;
